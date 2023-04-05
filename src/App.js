@@ -10,6 +10,7 @@ import { NavigationBar } from './components/Navbar';
 import {Logout} from './components/Logout'
 import { Profile } from './components/Profile';
 function App() {
+  var a="check";
   return (
     
     <div>
