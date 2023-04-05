@@ -1,0 +1,67 @@
+#home_title{
+    text-align:center;
+    color:wheat;
+}
+
+.posts{
+    font-size: 20px;
+    color:rgb(249, 240, 106);
+}
+
+.posts span{
+    font-size:20px;
+    color:rgb(42, 205, 148);
+}
+
+.footer_button{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no_pics{
+    text-align:center;
+    color:azure;
+}
+
+.posts img{
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.comment_section{
+    color:wheat;
+}
+
+#comment_section{
+    color:cyan;
+}
+
+#comment_username{
+    color:rgb(254, 170, 68);
+}
+
+#comment_comments{
+    color:rgb(181, 237, 243);
+}
+
+.desc_heading{
+    color:cyan;
+}
+
+.description{
+    color:cyan;
+    font-size: 18px;
+}
+
+.division{
+    width:100%;
+    border:1px solid rgb(177, 229, 241);
+}
+
+#username{
+    color:green;
+    font-size: 20px;
+    margin:4px;
+}
+

@@ -1,0 +1,28 @@
+.signup{
+    text-align: center;
+    color:wheat;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.signup_body{
+    border:2px solid rgb(153, 227, 191);
+    color:rgb(254, 254, 165);
+    border-radius:5px;
+}
+
+.signup_inner{
+    padding:20px;
+}
+
+.signup_button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register_footer{
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 20px;
+    color:wheat;
+}

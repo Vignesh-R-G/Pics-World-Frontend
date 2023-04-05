@@ -1,0 +1,19 @@
+body{
+    background-color: #282c34;
+}
+
+.upload-class{
+    color:rgb(254, 254, 165);
+}
+
+#upload_photos{
+    color:wheat;
+    text-align: center;
+}
+
+.upload_button{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+

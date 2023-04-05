@@ -1,0 +1,30 @@
+.login{
+    text-align: center;
+    color:wheat;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.login_body{
+    border:2px solid rgb(153, 227, 191);
+    border:2px solid ;
+    color:rgb(254, 254, 165);
+    border-radius:5px;
+}
+
+.login_inner{
+    padding:20px;
+}
+
+.login_button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login_footer{
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 20px;
+    color:wheat;
+}
+
