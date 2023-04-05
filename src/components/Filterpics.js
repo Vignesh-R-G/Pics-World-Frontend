@@ -13,7 +13,8 @@ export const FilterPics=()=>{
     const navigate=useNavigate()
     const det=useContext(context)
     const details=det.searchdetails
-    
+
+
     const view=(x)=>{
         det.setViewDetails(x)
         det.setSearchDetails([])
@@ -49,6 +50,7 @@ export const FilterPics=()=>{
             <div className='footer_button'>
                 <button className="btn btn-success" onClick={()=>{det.setSearchDetails([]);navigate("/")}}>Go Back</button>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

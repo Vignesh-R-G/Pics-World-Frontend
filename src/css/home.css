@@ -65,3 +65,15 @@
     margin:4px;
 }
 
+#likedusers{
+    color:greenyellow;
+}
+
+#likes_title{
+    text-align:center;
+    color:bisque;
+}
+
+.likes{
+    color:white;
+}

@@ -1,14 +1,15 @@
 .login{
     text-align: center;
-    color:wheat;
-    font-family:Arial, Helvetica, sans-serif
+    color:rgb(171, 231, 82);
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .login_body{
-    border:2px solid rgb(153, 227, 191);
-    border:2px solid ;
     color:rgb(254, 254, 165);
-    border-radius:5px;
+}
+
+.login_borders{
+    border-radius: 5px;
 }
 
 .login_inner{

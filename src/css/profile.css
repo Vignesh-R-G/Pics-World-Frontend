@@ -1,0 +1,18 @@
+.profile_header{
+    color:beige;
+    text-align: center;
+}
+
+.user_photo{
+    border:5px solid white;
+    border-radius: 50%;
+}
+
+.about_user{
+    color:azure;
+}
+
+.about_user .line{
+    border-bottom: 1px solid aqua;
+}
+

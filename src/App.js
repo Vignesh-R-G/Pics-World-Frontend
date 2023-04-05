@@ -8,10 +8,12 @@ import { FilterPics } from './components/Filterpics';
 import { View } from './components/View';
 import { NavigationBar } from './components/Navbar';
 import {Logout} from './components/Logout'
+import { Profile } from './components/Profile';
 function App() {
   return (
     
     <div>
+          
           <Context>
             <Routes>
               <Route path="/" element={<><NavigationBar/><Home/></>}/>
@@ -21,6 +23,7 @@ function App() {
               <Route path="/upload" element={<><NavigationBar/><Upload/></>}/>
               <Route path="/view" element={<><NavigationBar/><View/></>}/>
               <Route path="/logout" element={<><NavigationBar/><Logout/></>}/>
+              <Route path="/profile" element={<><NavigationBar/><Profile/></>}/>
             </Routes>
           </Context>
     </div>

@@ -43,12 +43,12 @@ export const Register=()=>{
             <br></br>
             <div className="row">
                 <div className="col-md-4"></div>
-                <div className="col-md-4"> 
+                <div className="col-md-4 bg bg-dark"> 
                         <div className="signup_body">  
                             <div className='signup_inner'>
                             <div className='signup'>
                                 <h1>SignUp</h1>
-                                <hr></hr>
+                                <br></br>
                             </div>
                             <form onSubmit={signup}>
                                 <div className="form-group">
@@ -77,10 +77,10 @@ export const Register=()=>{
                                 </div>
                                 <br></br>
                                 <div className="signup_button">
-                                    <button className="btn btn-outline-primary" type="submit">SignUp</button>
+                                    <button className="btn btn-primary" type="submit">SignUp</button>
                                 </div>
                                 <br></br>
-                                <p id="register_footer">Already a user?&ensp; &ensp;<button onClick={()=>navigate("/login")} className="btn btn-outline-success">Login</button></p>
+                                <p id="register_footer">Already a user?&ensp; &ensp;<button onClick={()=>navigate("/login")} className="btn btn-success">Login</button></p>
                             </form>
                             </div>
                         </div>

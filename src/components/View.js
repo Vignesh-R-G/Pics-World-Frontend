@@ -15,10 +15,15 @@ export const View=()=>{
     const [comments,setComments]=useState([])
     const [postcomment,setPostComment]=useState("")
     const [nocomments,setNoComments]=useState(false)
+    const [likes,setLikes]=useState(false)
+    const [likedusers,setLikedUsers]=useState([])
+    const [likeid,setLikeId]=useState("")
     const navigate=useNavigate()
 
     useEffect(()=>{
+        window.scrollTo({top:0,behaviour:'Smooth'})
         getcomments()
+        checklike()
     },[])
 
     const getcomments=()=>{
@@ -36,7 +41,7 @@ export const View=()=>{
     const addcomment=(e)=>{
         const datas={
             postid:post._id,
-            username:localStorage.getItem("picsworld_username"),
+            username:det.username,
             comment:postcomment
         }
         axios.post("http://localhost:5000/comments/postcomments",datas).then((res)=>{
@@ -52,6 +57,49 @@ export const View=()=>{
         axios.delete(`http://localhost:5000/comments/deletecomment/${id}`).then((res)=>{
                 getcomments()
                 toast.success("Comment Deleted successfully !")
+        })
+    }
+
+    const likepost=()=>{
+        const datas={
+            name:det.username,
+            like:true,
+            postid:post._id
+        }
+        axios.post("http://localhost:5000/like/postlikes",datas).then((res)=>{
+            toast.success("Like Added Successfuly !")
+            checklike()
+        })
+    }
+
+    const checklike=()=>{
+        const datas={
+            name:det.username,
+            postid:post._id
+        }
+        axios.post("http://localhost:5000/like/checklikes",datas).then((res)=>{
+            if(res.data.status){
+                setLikes(true)
+                setLikeId(res.data.likeid)
+            }
+            else{
+                setLikes(false)
+            }
+        })
+    }
+
+    const dislikepost=()=>{
+        checklike()
+        axios.delete(`http://localhost:5000/like/dislikes/${likeid}`).then((res)=>{
+            toast.success("Disliked the post successfully !")
+            checklike()
+        })
+    }
+
+    const viewlikes=()=>{
+        axios.get(`http://localhost:5000/like/getlikes/${post._id}`).then((res)=>{
+            console.log(res.data)
+            setLikedUsers(res.data.msg)
         })
     }
 
@@ -84,6 +132,36 @@ export const View=()=>{
             </div>
             <div className="row">
                 <div className="col-md-2"></div>
+                <div className="col-md-6">
+                    {likes?
+                    <button className="btn btn-primary" onClick={dislikepost}>Dislike Post</button>:
+                    <button className="btn btn-success" onClick={likepost}>Like Post</button>
+                    }
+                </div>
+            </div>
+            <br></br>
+            <div className="row">
+                <div className="col-md-2"></div>
+                <div className="col-md-6">
+                    <button className="btn btn-success" onClick={viewlikes}>View Likes</button>
+                </div>
+            </div>
+            <br></br>
+            <div className="row likes">
+                <h2 id="likes_title">Liked Users</h2>
+                <div className="col-md-3"></div>
+                <div className="col-md-6">
+                    <hr></hr>
+                    {likedusers.map((x)=><div>
+                        <h4 id="likedusers">{x.Name}</h4>
+                        <hr></hr>
+                    </div>
+                    )}
+                </div>
+            </div>
+            <br></br>
+            <div className="row">
+                <div className="col-md-2"></div>
                 <div className="col-md-8 desc_heading">
                     <h3>Description :</h3>
                     <hr></hr>
@@ -98,21 +176,21 @@ export const View=()=>{
             </div>
             <div className="comment_section">
                 <div className="row">
-                    <div className="col-md-2"></div>
-                    <div className="col-md-4">
+                    <div className="col-md-2 "></div>
+                    <div className="col-md-4 ">
                         <h3 id="comment_heading">Comments :</h3>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-2"></div>
-                    <div className="col-md-5">
+                    <div className="col-md-2 mt-3"></div>
+                    <div className="col-md-5 mt-3">
                         <form>
                             <div className="form-group">
                                 <input type="text" placeholder="Add your comments here" className="form-control" value={postcomment} onChange={(e)=>setPostComment(e.target.value)} required></input>
                             </div>
                         </form>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 mt-3">
                         <button className="btn btn-success" onClick={addcomment}>Post Comment</button>
                     </div>
                 </div>
@@ -125,7 +203,7 @@ export const View=()=>{
                         (comments.map((x)=><div>
                             <h4 id="comment_username">Name : {x.UserName}</h4>
                             <p id="comment_comments">Comment : {x.Comment}</p>
-                            {(localStorage.getItem("picsworld_username")===x.UserName)?
+                            {(det.username===x.UserName)?
                             <button onClick={()=>deletecomment(x._id)} className="btn btn-outline-success">Delete</button>
                             :""}   
                             <hr></hr>
