@@ -6,7 +6,6 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from 'react-router-dom'
-import img1 from '../assets/img1.jfif'
 import { context } from './Context'
 
 export const FilterPics=()=>{
@@ -33,7 +32,7 @@ export const FilterPics=()=>{
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-4">
-                            <img src={img1} width="350" height="300"/>
+                            <img src={`http://localhost:5000/Uploads/${x.photo}`} width="450" height="300"/>
                         </div>
                         <div className='col-md-4'>
                             <br></br>

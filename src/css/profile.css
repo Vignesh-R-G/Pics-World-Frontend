@@ -1,5 +1,6 @@
 .profile_header{
     color:beige;
+    text-shadow:1px 1px 1px beige;
     text-align: center;
 }
 
@@ -9,10 +10,28 @@
 }
 
 .about_user{
-    color:azure;
+    color:greenyellow;
+    text-shadow:1px 1px 1px greenyellow;
 }
 
 .about_user .line{
     border-bottom: 1px solid aqua;
+}
+
+.newpost_button{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+
+#nopics{
+    color:bisque;
+    text-align: center;
+    text-shadow: 1px 1px 1px goldenrod;
+}
+
+#posts_title{
+    color:bisque;
+    text-align: center;
 }
 

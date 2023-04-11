@@ -1,12 +1,12 @@
 import React from "react";
 import '../bootstrap.min.css'
 import '../css/upload.css'
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useContext} from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from 'react-router-dom'
-
+import {context} from './Context'
 
 export const Upload=()=>{
     
@@ -14,17 +14,24 @@ export const Upload=()=>{
     const[title,setTitle]=useState("")
     const[description,setDescription]=useState("")
     const[category,setCategory]=useState("")
-    const[imageurl,setImageurl]=useState("")
+    const cont=useContext(context)
+    const[file,setFile]=useState(null)
+
+    const handleChange=((e)=>{
+        e.preventDefault()
+        setFile(e.target.files[0])
+        
+    })
 
     const upload=(e)=>{
-        const datas={
-            title:title,
-            description:description,
-            category:category,
-            imageurl:imageurl,
-            postedby:localStorage.getItem("picsworld_username")
-        }
-        axios.post("http://localhost:5000/profile/upload",datas).then((res)=>{
+        const formData=new FormData()
+        formData.append("photo",file)
+        formData.append("description",description)
+        formData.append("category",category)
+        formData.append("postedby",cont.username)
+        formData.append("title",title)
+
+        axios.post("http://localhost:5000/profile/upload",formData).then((res)=>{
             if(res.data.status){
                 console.log(res.data)
                 toast.success(res.data.msg)
@@ -64,25 +71,30 @@ export const Upload=()=>{
                             <option>Choose Category</option>
                             <option>Cars</option>
                             <option>Bikes</option>
-                            <option>Fitness</option>
+                            <option>News</option>
                             <option>Walpaper</option>
                             <option>Food</option>
                             <option>Nature</option>
-                            <option>Art</option>
-                            <option>Travel</option>
+                            <option>Sports</option>
+                            <option>Technology</option>
                             <option>Quotes</option>
                             <option>Cats</option>
                             <option>Dogs</option>
+                            <option>Blog</option>
                         </select>
                     </div>
                     <br></br>
                     <div className="form-group">
                         <label>Image:</label>
-                        <input type="file" className="form-control" onChange={(e)=>{let file=e.target.files[0];setImageurl(URL.createObjectURL(file))}} required></input>
+                        <input type="file" className="form-control" onChange={handleChange} required></input>
                     </div>
                     <br></br>
                     <div className="upload_button">
                         <button className="btn btn-outline-warning" type="submit">Upload Post</button>
+                    </div>
+                    <br></br>
+                    <div className="upload_button">
+                        <button className="btn btn-outline-warning" onClick={()=>navigate("/")}>Go back</button>
                     </div>
                 </form>
                 </div>

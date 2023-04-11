@@ -5,7 +5,6 @@ import {useState,useContext,useEffect} from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
-import img1 from '../assets/img1.jfif'
 import { useNavigate } from 'react-router-dom'
 import { context } from "./Context";
 
@@ -18,6 +17,8 @@ export const View=()=>{
     const [likes,setLikes]=useState(false)
     const [likedusers,setLikedUsers]=useState([])
     const [likeid,setLikeId]=useState("")
+    const [clickedlike,setClickedLike]=useState(false)
+    const [totallikes,setTotalLikes]=useState(0)
     const navigate=useNavigate()
 
     useEffect(()=>{
@@ -69,6 +70,7 @@ export const View=()=>{
         axios.post("http://localhost:5000/like/postlikes",datas).then((res)=>{
             toast.success("Like Added Successfuly !")
             checklike()
+            viewlikes()
         })
     }
 
@@ -85,14 +87,15 @@ export const View=()=>{
             else{
                 setLikes(false)
             }
+            setTotalLikes(res.data.totallike)
         })
     }
 
     const dislikepost=()=>{
-        checklike()
         axios.delete(`http://localhost:5000/like/dislikes/${likeid}`).then((res)=>{
-            toast.success("Disliked the post successfully !")
+            toast.success("Like has been removed successfully !")
             checklike()
+            viewlikes()
         })
     }
 
@@ -100,9 +103,9 @@ export const View=()=>{
         axios.get(`http://localhost:5000/like/getlikes/${post._id}`).then((res)=>{
             console.log(res.data)
             setLikedUsers(res.data.msg)
+            setClickedLike(true)
         })
     }
-
     return(
         <div className="container-fluid" id="top">
             <br></br>
@@ -117,7 +120,7 @@ export const View=()=>{
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-4">
-                            <img src={img1} width="350" height="300"/>
+                            <img src={`http://localhost:5000/Uploads/${post.photo}`} width="450" height="300"/>
                         </div>
                         <div className='col-md-4'>
                             <br></br>
@@ -131,22 +134,24 @@ export const View=()=>{
                     <br></br>
             </div>
             <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-6">
+                <div className="col-md-3 mt-3"></div>
+                <div className="col-md-3 mt-3">
                     {likes?
-                    <button className="btn btn-primary" onClick={dislikepost}>Dislike Post</button>:
-                    <button className="btn btn-success" onClick={likepost}>Like Post</button>
+                    <button className="btn btn-primary" onClick={dislikepost}>👎Remove Like</button>:
+                    <button className="btn btn-success" onClick={likepost}>👍Like Post</button>
                     }
                 </div>
-            </div>
-            <br></br>
-            <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-6">
-                    <button className="btn btn-success" onClick={viewlikes}>View Likes</button>
+                <div className="col-md-3 mt-3">
+                    {clickedlike?
+                    <button className="btn btn-secondary" onClick={()=>setClickedLike(false)}>Minimize Likes</button>
+                    :<button className="btn btn-secondary" onClick={viewlikes}>View Likes</button>}
                 </div>
             </div>
             <br></br>
+            <br></br>
+            <h3 id="liked_by">Post Liked By : {totallikes} members</h3>
+            <br></br>
+            {clickedlike?
             <div className="row likes">
                 <h2 id="likes_title">Liked Users</h2>
                 <div className="col-md-3"></div>
@@ -159,6 +164,7 @@ export const View=()=>{
                     )}
                 </div>
             </div>
+            :""}
             <br></br>
             <div className="row">
                 <div className="col-md-2"></div>
@@ -213,11 +219,11 @@ export const View=()=>{
             </div>
             <br></br>
             <div className="row">
-                <div className="col-md-5"></div>
-                <div className="col-md-1">
+                <div className="col-md-5 mt-3"></div>
+                <div className="col-md-1 mt-3">
                     <button className="btn btn-success" onClick={()=>{det.setViewDetails([]);navigate("/")}}>Go Back</button>
                 </div>
-                <div className="col-md-1">
+                <div className="col-md-1 mt-3">
                     <button className="btn btn-success" onClick={()=>window.scrollTo({top:0,behaviour:'Smooth'})}>Go Top</button>
                 </div>
             </div>
