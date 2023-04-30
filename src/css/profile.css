@@ -2,10 +2,14 @@
     color:beige;
     text-shadow:1px 1px 1px beige;
     text-align: center;
+    border-radius: 10px;
+    padding:10px;
+    background-color: rgb(92, 19, 249);
 }
 
+
 .user_photo{
-    border:5px solid white;
+    border:5px solid aqua;
     border-radius: 50%;
 }
 
@@ -31,7 +35,69 @@
 }
 
 #posts_title{
+    color:white;
+    text-align: center;
+}
+
+.line{
+    border-bottom: 1px solid aqua;
+}
+
+#about_description{
+    color:white;
+}
+
+.bio_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile_username{
     color:bisque;
     text-align: center;
 }
 
+.user_image{
+    border-right:2px solid aqua;
+}
+
+.button_image{
+    padding-left:45px;
+}
+
+.follow{
+    color:bisque;
+}
+
+.followers{
+    text-align: center;
+    /*background-color:#FEE715FF ;*/
+    background-color: rgb(7, 241, 152);
+    border:5px;
+    border-radius:10px;
+    color:black;
+    padding:10px;
+}
+
+.followers_length{
+    color:#47923f;
+    font-size:40px;
+    font-weight: 400;
+}
+
+.followbut{
+    float:right;
+}
+
+.divi{
+    width:100%;
+    border:1px solid rgb(227, 62, 122);
+}
+
+.followers_total{
+    border-radius:10px;
+    padding:30px;
+    border:3px solid whitesmoke;
+    box-shadow:2px 2px 2px white;
+}

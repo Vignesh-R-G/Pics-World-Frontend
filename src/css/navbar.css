@@ -1,3 +1,10 @@
 .navbar{
+    margin-left:12px;
+    margin-right:12px;
     padding:10px;
+}
+
+#logout{
+    position:relative;
+    top:5px;
 }

@@ -8,9 +8,15 @@ export const Context=(props)=>{
     const [viewdetails,setViewDetails]=useState([])
     const [verifylogin,setVerifyLogin]=useState(false)
     const [username,setUserName]=useState("")
+    const [useremail,setUserEmail]=useState("")
+    const [followersinfo,setFollowersInfo]=useState([])
+    const [followinginfo,setFollowingInfo]=useState([])
+    const [profileurl,setProfileUrl]=useState("")
+
+    
     return(
         <div>
-            <context.Provider value={{setSearchDetails,searchdetails,viewdetails,setViewDetails,verifylogin,setVerifyLogin,username,setUserName}}>{props.children}</context.Provider>
+            <context.Provider value={{setSearchDetails,searchdetails,viewdetails,setViewDetails,verifylogin,setVerifyLogin,username,setUserName,useremail,setUserEmail,followersinfo,setFollowersInfo,followinginfo,setFollowingInfo,profileurl,setProfileUrl}}>{props.children}</context.Provider>
         </div>
     )
 }

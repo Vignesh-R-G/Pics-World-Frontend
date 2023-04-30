@@ -2,11 +2,13 @@ import React from "react";
 import '../bootstrap.min.css'
 import '../css/upload.css'
 import {useState,useEffect,useContext} from 'react'
-import axios from 'axios'
+import axios from "../axios/Axios";
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from 'react-router-dom'
+import {BarLoader, HashLoader} from 'react-spinners'
 import {context} from './Context'
+import { NavigationBar } from "./Navbar";
 
 export const Upload=()=>{
     
@@ -15,23 +17,35 @@ export const Upload=()=>{
     const[description,setDescription]=useState("")
     const[category,setCategory]=useState("")
     const cont=useContext(context)
-    const[file,setFile]=useState(null)
+    const [loading,setLoading]=useState(false)
+    const[file,setFile]=useState("")
+    
+    useEffect(()=>{
+        if(!localStorage.getItem("picsworld_token")){
+            setTimeout(()=>{
+                navigate("/login")
+            },3000)
+        }
+    },[])
 
     const handleChange=((e)=>{
         e.preventDefault()
-        setFile(e.target.files[0])
+        setFile(e.target.value)
         
     })
 
     const upload=(e)=>{
-        const formData=new FormData()
-        formData.append("photo",file)
-        formData.append("description",description)
-        formData.append("category",category)
-        formData.append("postedby",cont.username)
-        formData.append("title",title)
+        setLoading(true)
+        const datas={
+            image:file,
+            description:description,
+            category:category,
+            postedby:cont.username,
+            postedemail:cont.useremail,
+            title:title
+        }
 
-        axios.post("http://localhost:5000/profile/upload",formData).then((res)=>{
+        axios.post("/profile/upload",datas).then((res)=>{
             if(res.data.status){
                 console.log(res.data)
                 toast.success(res.data.msg)
@@ -39,6 +53,7 @@ export const Upload=()=>{
             else{
                 toast.warning(res.data.msg)
             }
+            setLoading(false)
         })
         e.preventDefault()
     }
@@ -46,9 +61,20 @@ export const Upload=()=>{
     return(
         <div className="background">
         <div className="container-fluid">
+        {loading?
+                <div className="loading">
+                    <HashLoader
+                    size={100}
+                    color="green"
+                    />
+                </div>
+            :
+            <div>
+            <NavigationBar/>
             <br></br>
             <br></br>
             <br></br>
+            {localStorage.getItem("picsworld_token")?<div>
             <div className="row">
             <div className="col-md-4"></div>
             <div className="col-md-4">
@@ -69,8 +95,7 @@ export const Upload=()=>{
                         <label>Select Category :</label>
                         <select value={category} className="form-control" onChange={(e)=>setCategory(e.target.value)} required>
                             <option>Choose Category</option>
-                            <option>Cars</option>
-                            <option>Bikes</option>
+                            <option>Travel</option>
                             <option>News</option>
                             <option>Walpaper</option>
                             <option>Food</option>
@@ -78,15 +103,14 @@ export const Upload=()=>{
                             <option>Sports</option>
                             <option>Technology</option>
                             <option>Quotes</option>
-                            <option>Cats</option>
-                            <option>Dogs</option>
+                            <option>Pets</option>
                             <option>Blog</option>
                         </select>
                     </div>
                     <br></br>
                     <div className="form-group">
                         <label>Image:</label>
-                        <input type="file" className="form-control" onChange={handleChange} required></input>
+                        <input type="url" placeholder="Enter the URL" className="form-control" onChange={handleChange} required></input>
                     </div>
                     <br></br>
                     <div className="upload_button">
@@ -101,6 +125,19 @@ export const Upload=()=>{
             </div>
             <div className="col-md-4"></div>
             </div>
+            </div>
+            :<div><h2 className='no_pics'>Please Login to Proceed !</h2>
+            <br></br>
+            <h2 className='no_pics'>Redirecting to Login Page</h2>
+            <br></br>
+            <br></br>
+            <div className="bar_loading">
+                    <BarLoader
+                    size={100}
+                    color="green"
+                    />
+            </div></div>}
+            </div>}
         </div>
         <ToastContainer/>
         </div>

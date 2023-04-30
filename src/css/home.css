@@ -1,11 +1,28 @@
 #home_title{
     text-align:center;
-    color:wheat;
+    color:white;
+}
+
+.posts_even{
+    padding: 10px;
+    font-size: 20px;
+    color:rgb(249, 240, 106);
+    background-color: rgb(30, 46, 72);
+    border-radius:10px;
 }
 
 .posts{
+    padding: 10px;
     font-size: 20px;
     color:rgb(249, 240, 106);
+}
+
+.posts_odd{
+    padding: 10px;
+    font-size: 20px;
+    color:rgb(249, 240, 106);
+    background-color: darkslategrey;
+    border-radius:10px;
 }
 
 .posts span{
@@ -82,4 +99,60 @@
     text-align: center;
     text-shadow:1px 1px 1px greenyellow;
     color:greenyellow;
+}
+
+.loading{
+    height:100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bar_loading{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about_pics{
+    text-shadow: 1px 1px 1px white;
+    text-align: center;
+    color:white;
+}
+
+.about_pics_desc{
+    font-size: 18px;
+    color:white;
+}
+
+.footer{
+    padding:5px;
+    border-radius: 10px;
+    background-color: rgb(31, 71, 111);
+}
+
+a{
+    color:rgb(245, 221, 187);
+}
+
+a:hover{
+    color:bisque;
+}
+
+.image1{
+    transition:all 2s ease-in-out;
+}
+.image2{
+    transition:all 2s ease-in-out;
+}
+.image1:hover{
+    transform: scale(1.1);
+}
+.image2:hover{
+    transform: scale(1.1);
+}
+
+.title_background{
+    border-radius: 10px;
+    background-color: rgb(8, 63, 57);
 }

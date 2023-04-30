@@ -1,11 +1,13 @@
 import React from 'react'
 import '../bootstrap.min.css'
 import '../css/register.css'
-import {useState} from 'react'
-import axios from 'axios'
+import {useState,useEffect} from 'react'
+import axios from "../axios/Axios";
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from 'react-router-dom'
+import { NavigationBar } from './Navbar'
+import {BarLoader, HashLoader} from 'react-spinners'
 
 export const Register=()=>{
 
@@ -15,7 +17,14 @@ export const Register=()=>{
     const[mno,setMno]=useState("")
     const[age,setAge]=useState("")
     const[password,setPassword]=useState("")
+    const[loading,setLoading]=useState(true)
     
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },1000)
+    },[])
+
     const signup=(e)=>{
         const datas={
             name:name,
@@ -24,9 +33,10 @@ export const Register=()=>{
             age:age,
             password:password
         }
-        axios.post("http://localhost:5000/user/register",datas).then((res)=>{
+        axios.post("/user/register",datas).then((res)=>{
             if(res.data.status){
                 toast.success(res.data.msg)
+                navigate("/login")
             }
             else{
                 toast.warning(res.data.msg)
@@ -38,6 +48,15 @@ export const Register=()=>{
     return(
         
         <div className='container-fluid'>
+            {loading?
+                <div className="loading">
+                    <HashLoader
+                    size={100}
+                    color="green"
+                    />
+                </div>
+            :<div>
+            <NavigationBar/>
             <br></br>
             <br></br>
             <br></br>
@@ -88,6 +107,7 @@ export const Register=()=>{
                 <div className="col-md-4"> </div>
             </div>
             <ToastContainer/>
+            </div>}
             </div>
     )
 }

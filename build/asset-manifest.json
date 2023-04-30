@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2e052b9d.css",
+    "main.js": "/static/js/main.037a989a.js",
+    "static/media/user_image.png": "/static/media/user_image.6ade86e3bdcff4cf076a.png",
+    "static/media/picsworld_logo.png": "/static/media/picsworld_logo.d409656916bc079b4baf.png",
+    "index.html": "/index.html",
+    "main.2e052b9d.css.map": "/static/css/main.2e052b9d.css.map",
+    "main.037a989a.js.map": "/static/js/main.037a989a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e052b9d.css",
+    "static/js/main.037a989a.js"
+  ]
+}
